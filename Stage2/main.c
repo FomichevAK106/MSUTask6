@@ -4,8 +4,8 @@
 #include <string.h>
 #define TESTFUNCTIONSNUM 11
 
-#define ROOTPRECISION 0.0001 // root calculation precision
-#define INTEGRALPRECISION 0.0001 // integral calculation precision
+#define ROOTPRECISION 0.000005 // root calculation precision
+#define INTEGRALPRECISION 0.000005 // integral calculation precision
 #define XFROM 0.264
 #define XTO 3.0
 
