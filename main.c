@@ -156,7 +156,7 @@ int main(int argc, char *argv[]) {
             void *parameters[5] = {&f1_i, &f2_i, &x_from, &x_to, &precision};
 
             for (int t = 0; t < 5; ++t) {
-                if ((argc == i + 1) || argv[i + 1][0] == '-') {
+                if ((argc == i + 1) || (argv[i + 1][0] == '-' && !sscanf(argv[i + 1], "%lf", &precision))) {
                     printf("In -root_t:\n    "
                         "Error: Insufficient number of arguments: %d (expected 5).\n\n", t);
                     sufficient_params = 0;
@@ -170,8 +170,27 @@ int main(int argc, char *argv[]) {
                     correct_params = 0;
                 }
             }
+
             if (!sufficient_params)
                 continue;
+
+            if (f1_i < 0 || f1_i >= TESTFUNCTIONSNUM) {
+                printf("In -root_t:\n    "
+                    "Error: Invalid <f1_i> parameter value: %d <--- this parameter must lie between 0 and %d.\n\n", f1_i, TESTFUNCTIONSNUM - 1);
+                correct_params = 0;
+            }
+
+            if (f2_i < 0 || f2_i >= TESTFUNCTIONSNUM) {
+                printf("In -root_t:\n    "
+                    "Error: Invalid <f2_i> parameter value: %d <--- this parameter must lie between 0 and %d.\n\n", f2_i, TESTFUNCTIONSNUM - 1);
+                correct_params = 0;
+            }
+
+            if (precision <= 0) {
+                printf("In -root_t:\n    "
+                    "Error: Invalid <prec> parameter value: %lf <--- this parameter must be greater than 0.\n\n", precision);
+                correct_params = 0;
+            }
 
             if (correct_params)
                 root_test(f1_i, f2_i, x_from, x_to, precision);
@@ -192,7 +211,7 @@ int main(int argc, char *argv[]) {
             void *parameters[4] = {&func_i, &x_from, &x_to, &precision};
 
             for (int t = 0; t < 4; ++t) {
-                if ((argc == i + 1) || argv[i + 1][0] == '-') {
+                if ((argc == i + 1) || (argv[i + 1][0] == '-' && !sscanf(argv[i + 1], "%lf", &precision))) {
                     printf("In -integral_t:\n    "
                         "Error: Insufficient number of arguments: %d (expected 4).\n\n", t);
                     sufficient_params = 0;
@@ -206,15 +225,28 @@ int main(int argc, char *argv[]) {
                     correct_params = 0;
                 }
             }
+
             if (!sufficient_params)
                 continue;
+
+            if (func_i < 0 || func_i >= TESTFUNCTIONSNUM) {
+                printf("In -integral_t:\n    "
+                    "Error: Invalid <func_i> parameter value: %d <--- this parameter must lie between 0 and %d.\n\n", func_i, TESTFUNCTIONSNUM - 1);
+                correct_params = 0;
+            }
+
+            if (precision <= 0) {
+                printf("In -integral_t:\n    "
+                    "Error: Invalid <prec> parameter value: %lf <--- this parameter must be greater than 0.\n\n", precision);
+                correct_params = 0;
+            }
 
             if(correct_params)
                 integral_test(func_i,  x_from, x_to, precision);
         }
     }
 
-    if (!pretest_flag && !root_test_flag && !integral_test_flag && !verbose_flag) {
+    if (!pretest_flag && !root_test_flag && !integral_test_flag) {
         printf("Calculating area between functions f1, f2 and f3...\n"
            "root precision: %.12lf\n"
            "integral precision: %.12lf\n"
