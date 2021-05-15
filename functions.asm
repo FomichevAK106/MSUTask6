@@ -10,7 +10,7 @@ GLOBAL f3
 f1:
     push ebp
     mov ebp, esp
-    
+
     finit
     ; st0 == x
     fld qword [ebp + 8]
