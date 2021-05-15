@@ -88,8 +88,8 @@ void pretest(double root_precision, double integral_precision) {
     RootTest root_test_3 = {"f1      f0_test", f1,      f0_test, 0.256, 3, 0.0003, 1.202004558148803};
     RootTest root_test_4 = {"f2      f6_test", f2,      f6_test, 0.256, 3, 0.0004, 1.925017246276293};
     RootTest root_test_5 = {"f6_test f2_test", f6_test, f2_test, 1,     2, 0.0005, 1.640661448622048};
-    RootTest root_test_6 = {"f6_test f2_test", f4_test, f7_test, 3,     4, 0.0006, 3.461215571832334};
-    RootTest root_test_7 = {"f4_test f7_test", f3,      f2,      0.256, 3, 0.0007, 1.366025403784439};
+    RootTest root_test_6 = {"f4_test f7_test", f4_test, f7_test, 3,     4, 0.0006, 3.461215571832334};
+    RootTest root_test_7 = {"f3      f2     ", f3,      f2,      0.256, 3, 0.0007, 1.366025403784439};
 
     IntegralTest integral_test_1  = {"f1_test", f1_test,  1,  2, 0.0001, 3.608197662162};
     IntegralTest integral_test_2  = {"f2_test", f2_test,  2,  3, 0.0001, 2.541666666667};
